@@ -1,0 +1,330 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: My Contact Pal API
+  description: An API to power the frontend of My Contact Pal
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: crasonshrestha.com
+basePath: /api
+schemes:
+  - http
+paths:
+  /login.php:
+    post:
+      summary: Allows an existing user to access their account
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: login_json
+          description: JSON with properties and values for login and password of an existing user
+          required: true
+          schema:
+            type: object
+            required:
+              - login
+              - password
+            properties:
+              login:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              rows:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    UserID:
+                      type: integer
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+              endpoint:
+                type: string
+              status:
+                type: string
+              error:
+                type: string
+        400:
+          description: Bad request
+        404:
+          description: Resource not found
+        500:
+          description: Unexpected error
+  /signup.php:
+    post:
+      summary: Creates an account for a new user
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: signup_json
+          description: JSON with properties and values for login, password, first name, and last name for a new user
+          required: true
+          schema:
+            type: object
+            required:
+              - login
+              - password
+              - firstName
+              - lastName
+            properties:
+              login:
+                type: string
+              password:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              rows:
+                type: array
+                items:
+                  type: object
+              endpoint:
+                type: string
+              status:
+                type: string
+              error:
+                type: string
+        400:
+          description: Bad request
+        404:
+          description: Resource not found
+        500:
+          description: Unexpected error
+  /search.php:
+    get:
+      summary: Returns a list of matching contacts for an existing user
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: search_json
+          description: JSON with properties and values for login, password, and user ID of an existing user
+          required: true
+          schema:
+            type: object
+            required:
+              - login
+              - password
+              - userID
+            properties:
+              login:
+                type: string
+              password:
+                type: string
+              userID:
+                type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              rows:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    UserID:
+                      type: integer
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+              endpoint:
+                type: string
+              status:
+                type: string
+              error:
+                type: string
+        400:
+          description: Bad request
+        404:
+          description: Resource not found
+        500:
+          description: Unexpected error
+  /add.php:
+    post:
+      summary: Creates a new contact for an existing user
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: add_json
+          description: JSON with properties and values for first name, last name, user ID, and other optional contact information
+          required: true
+          schema:
+            type: object
+            required:
+              - firstName
+              - lastName
+              - userID
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              phone:
+                type: string
+              address:
+                type: string
+              zip:
+                type: string
+              state:
+                type: string
+              city:
+                type: string
+              userID:
+                type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              rows:
+                type: array
+                items:
+                  type: object
+              endpoint:
+                type: string
+              status:
+                type: string
+              error:
+                type: string
+        400:
+          description: Bad request
+        404:
+          description: Resource not found
+        500:
+          description: Unexpected error
+  /delete.php:
+    post:
+      summary: Deletes a contact for an existing user
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: delete_json
+          description: JSON with properties and values for contact ID and user ID
+          required: true
+          schema:
+            type: object
+            required:
+              - contactID
+              - userID
+            properties:
+              contactID:
+                type: integer
+              userID:
+                type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              rows:
+                type: array
+                items:
+                  type: object
+              endpoint:
+                type: string
+              status:
+                type: string
+              error:
+                type: string
+        400:
+          description: Bad request
+        404:
+          description: Resource not found
+        500:
+          description: Unexpected error
+  /edit.php:
+    post:
+      summary: Modifies an existing contact for an existing user
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: edit_json
+          description: JSON with properties and values for first name, last name, user ID, and other optional contact information
+          required: true
+          schema:
+            type: object
+            required:
+              - firstName
+              - lastName
+              - userID
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              phone:
+                type: string
+              address:
+                type: string
+              zip:
+                type: string
+              state:
+                type: string
+              city:
+                type: string
+              userID:
+                type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              rows:
+                type: array
+                items:
+                  type: object
+              endpoint:
+                type: string
+              status:
+                type: string
+              error:
+                type: string
+        400:
+          description: Bad request
+        404:
+          description: Resource not found
+        500:
+          description: Unexpected error
